@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190516012114) do
+ActiveRecord::Schema.define(version: 20190516214939) do
 
   create_table "vehicles", primary_key: "vehicle_identifier", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "created_at", null: false
@@ -18,4 +18,14 @@ ActiveRecord::Schema.define(version: 20190516012114) do
     t.index ["vehicle_identifier"], name: "index_vehicles_on_vehicle_identifier", unique: true
   end
 
+  create_table "waypoints", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "vehicle_id"
+    t.string "latitude"
+    t.string "longitude"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["vehicle_id"], name: "index_waypoints_on_vehicle_id"
+  end
+
+  add_foreign_key "waypoints", "vehicles", primary_key: "vehicle_identifier"
 end
