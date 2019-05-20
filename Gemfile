@@ -5,7 +5,10 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-
+# Install bootstrap 4 gem, github: /twbs/bootstrap-rubygem
+gem 'bootstrap', '~> 4.3.1'
+# Install jquery gem
+gem 'jquery-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.7'
 # Use mysql as the database for Active Record
