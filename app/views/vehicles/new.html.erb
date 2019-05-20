@@ -1,6 +1,17 @@
-<%= form_for :vehicle, url: vehicles_path do |f| %>
-    <%= f.label :vehicle_identifier %>
-    <%= f.text_field :vehicle_identifier %><br>
-
-    <%= f.submit %>
-<%end %>
+<div class="container">
+    <fieldset>
+        <legend> Crear nuevo vehículo </legend>
+        <%= form_for :vehicle, url: vehicles_path do |f| %>
+            <div class="form-group row">
+                <label for="vehicle_identifier" class="col-sm-2 col-form-label">Placa Patente </label>
+                <div class="col-sm-10">
+                    <%= f.text_field :vehicle_identifier %><br>
+                </div>
+            </div>
+            <div class="actions">
+                <button type="submit" class="btn btn-primary btn-sm">Guardar</button>
+                <%= link_to 'Volver', vehicles_path, :class => "btn btn-secondary btn-sm"%>
+            </div>
+        <%end %>
+    </fieldset>
+</div>

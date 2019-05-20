@@ -1,1 +1,11 @@
-<%= @vehicle.vehicle_identifier %>
+<div class="container">
+    <div class="form-group row">
+        <label class="col-sm-2">Placa Patente  </label>
+        <div class="col-sm-6">
+            <%= @vehicle.vehicle_identifier %>
+        </div>
+    </div>
+    <div class="btn btn-primary">
+        <%= link_to 'Volver', vehicles_path, :class => "btn-primary btn-sm"%>
+    </div>
+</div>

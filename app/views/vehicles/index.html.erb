@@ -1,1 +1,65 @@
-<%= render @vehicles %>
+<link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+<div class="container">
+    <h3>Vehículos <%= link_to 'Nuevo', new_vehicle_path, :class => "btn-primary btn-sm"%></h3>
+    <div class="row">
+        <table id="table" class="table" >
+            <thead>
+                <th>Placa Patente</th>
+                <th>Acciones</th>
+            </thead>
+            <tbody>
+                <% @vehicles.each do |vehicle|  %>
+                <tr>
+                    <td><%= vehicle.vehicle_identifier %></td>
+                    <td>
+                    <%= link_to 'Ver', vehicle, :class => "btn-success btn-sm" %>
+                    </td>
+                </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script>
+    var table;
+    $(document).ready(function () {
+        table = $("#table").DataTable({
+            "responsive": true,
+            "order": [0, 'asc'],
+            "paging": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "columnDefs": [
+                    { targets: 'no-sort', orderable: false }
+                ],
+            "language": {
+                "sProcessing":     "Procesando...",
+                "sLengthMenu":     "Mostrar _MENU_ registros",
+                "sZeroRecords":    "No se encontraron resultados",
+                "sEmptyTable":     "Ningún dato disponible en esta tabla",
+                "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+                "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix":    "",
+                "sSearch":         "Buscar:",
+                "sUrl":            "",
+                "sInfoThousands":  ",",
+                "sLoadingRecords": "Cargando...",
+                "oPaginate": {
+                    "sFirst":    "Primero",
+                    "sLast":     "Último",
+                    "sNext":     "Siguiente",
+                    "sPrevious": "Anterior"
+                },
+                "oAria": {
+                    "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                }
+            },
+        });
+    });
+</script>
