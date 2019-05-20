@@ -2,8 +2,8 @@ class CreateWaypoints < ActiveRecord::Migration[5.1]
   def change
     create_table :waypoints do |t|
       t.string :vehicle_id, index: true
-      t.string :latitude
-      t.string :longitude
+      t.float :latitude
+      t.float :longitude
 
       t.timestamps
     end
