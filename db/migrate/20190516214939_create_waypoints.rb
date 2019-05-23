@@ -4,8 +4,8 @@ class CreateWaypoints < ActiveRecord::Migration[5.1]
       t.string :vehicle_id, index: true
       t.float :latitude
       t.float :longitude
+      t.datetime :sent_at
 
-      t.timestamps
     end
     add_foreign_key :waypoints, :vehicles, column: :vehicle_id, primary_key: :vehicle_identifier
   end
