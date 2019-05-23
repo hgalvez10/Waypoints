@@ -8,7 +8,6 @@ class VehiclesController < ApplicationController
     end
 
     def create
-        #render plain: params[:vehicle].inspect
         @vehicle = Vehicle.new vehicle_params
         @vehicle.save
 

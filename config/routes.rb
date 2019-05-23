@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   
   resources :vehicles
+  resources :waypoints
 
-  #get '/vehicles/new', to: 'vehicles#new'
-  #post '/vehicles', to: 'vehicles#create'
+  post '/api/v1/gps', to: 'waypoints#create'
   #get  '/vehicles/:vehicle_identifier', to: 'vehicles#show'
 end
