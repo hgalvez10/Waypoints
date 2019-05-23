@@ -15,15 +15,19 @@ class WaypointsController < ApplicationController
             render json: { status: 201, message: 'waypoint created successfully' }
         else
             render json: { status: 200, message: 'waypoint wasnt created successfully' }
-        
+        end
     rescue ActiveRecord::RecordNotFound => e
+        
         @vehicle_new = Vehicle.new do |v|
             v.vehicle_identifier = params[:vehicle_identifier]
         end
-        @vehicle_new.save
-        render json: @vehicle_new
-        #render json: { status: 200, message: 'not available vehicle' }
-        #render json: params[:latitude]    
+        @vehicle_new.waypoints.build(vehicle_id: params[:vehicle_identifier], latitude: params[:latitude], longitude: params[:longitude], sent_at: params[:sent_at])
+        
+        if @vehicle_new.save!
+            render json: { status: 201, message: 'vehicle and waypoint created successfully' }
+        else
+            render json: { status: 200, message: 'vehicle and waypoint wasnt created successfully' }
+        end
     end
 
     private
