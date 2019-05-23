@@ -1,0 +1,64 @@
+<div class="container">
+    <h3> Waypoints </h3><br>
+    <div class="row">
+        <div class="col-md-12">
+            <div id='mapid' style="width: 800px; height: 300px;"></div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-8">
+            <%= form_for :waypoint, url: waypoints_path do |f| %>
+                <div class="form-group row">
+                    <div class="form-group col-md-6">
+                        <label for="inputlatitude">Latitud</label>
+                        <input type="text" class="form-control" id="inputlatitude" name="latitude" readonly>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputLongitude">Longitud</label>
+                        <input type="text" class="form-control" id="inputLongitude" name="longitude" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputVehicleId" class="col-sm-2 col-form-label">Placa Patente</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="inputVehicleId" placeholder="Placa Patente" name="vehicle_identifier" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-success btn-sm">Agregar</button>
+                            <%= link_to 'Volver', waypoints_path, :class => "btn btn-secondary btn-sm"%>
+                        </div>
+                    </div>
+                </div>
+            <%end %>
+        </div>
+    </div>
+</div>
+
+<script>
+    var mymap = L.map('mapid').setView([-33.4626533, -70.6804048], 10);
+
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox.streets',
+        accessToken: 'pk.eyJ1IjoiaGdhbHZlejEwIiwiYSI6ImNqdnpqbnh0aDAxMnk0OG9uMnV0dnNzMGQifQ.g9JcGr0YRkDWaJ4TtkF94A'
+    }).addTo(mymap);
+
+    var popup = L.popup();
+
+    function onMapClick(e) {
+        popup
+            .setLatLng(e.latlng)
+            .setContent("You clicked the map at " + e.latlng.toString())
+            .openOn(mymap);
+        
+        document.getElementById('inputlatitude').value = e.latlng.lat;
+        document.getElementById('inputLongitude').value = e.latlng.lng;
+    }
+
+    mymap.on('click', onMapClick);
+</script>

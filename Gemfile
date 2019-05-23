@@ -9,8 +9,13 @@ end
 gem 'bootstrap', '~> 4.3.1'
 # Install jquery gem
 gem 'jquery-rails'
-# Install 'gmaps4rails' gem for use Google Maps
-gem 'gmaps4rails'
+gem 'jquery-ui-rails'
+# Front awesome rails
+gem 'font-awesome-rails', '~> 4.3'
+# Install 'leaflet-rails' gem for use Maps
+gem 'leaflet-rails', '~> 1.4'
+# datatable
+gem 'jquery-datatables'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.7'
 # Use mysql as the database for Active Record
