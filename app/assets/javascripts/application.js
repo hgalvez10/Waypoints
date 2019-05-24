@@ -20,3 +20,4 @@
 //= require datatables
 //= require_tree .
 //= require leaflet
+//= require sweetalert2
