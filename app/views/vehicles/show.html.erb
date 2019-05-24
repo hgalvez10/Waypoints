@@ -2,7 +2,9 @@
     <div class="form-group row">
         <label class="col-sm-2">Placa Patente  </label>
         <div class="col-sm-6">
-            <%= @vehicle.vehicle_identifier %>
+            <% @vehicles.each do |vehicle| %>
+                <%= vehicle.vehicle_identifier %>
+            <% end %>
         </div>
     </div>
     <div class="btn btn-primary">
