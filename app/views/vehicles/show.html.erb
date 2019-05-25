@@ -1,13 +1,49 @@
 <div class="container">
-    <div class="form-group row">
-        <label class="col-sm-2">Placa Patente  </label>
-        <div class="col-sm-6">
-            <% @vehicles.each do |vehicle| %>
-                <%= vehicle.vehicle_identifier %>
-            <% end %>
+    <h3> Últimas ubicaciones </h3><br>
+    <div align="center" class="row">
+        <div class="col-md-12">
+            <div id='mapid' style="width: 1000px; height: 300px; border: 1px solid #AAA;"></div>
         </div>
     </div>
-    <div class="btn btn-primary">
-        <%= link_to 'Volver', vehicles_path, :class => "btn-primary btn-sm"%>
+    <br>
+    <div class="row">
+        <div class="card-body">
+            <table id="table" class="table" >
+                <thead>
+                    <th>Placa Patente</th>
+                    <th>Longitud</th>
+                    <th>Latitud</th>
+                    <th>Última conexión</th>
+                </thead>
+                <tbody>
+                    <% @vehicles.each do |vehicle|  %>
+                    <tr>
+                        <td><%= vehicle.vehicle_id %></td>
+                        <td><%= vehicle.latitude %></td>
+                        <td><%= vehicle.longitude %></td>
+                        <td><%= vehicle.sent_at %></td>
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
+<script>
+    var mymap = L.map('mapid').setView([1.0302758, 34.3550684], 2);
+
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox.streets',
+        accessToken: 'pk.eyJ1IjoiaGdhbHZlejEwIiwiYSI6ImNqdnpqbnh0aDAxMnk0OG9uMnV0dnNzMGQifQ.g9JcGr0YRkDWaJ4TtkF94A'
+    }).addTo(mymap);
+    var obj = <%= @vehicles.to_json.html_safe %>;
+
+    for ( var i=0; i < obj.length; ++i )
+    {
+        L.marker( [obj[i].latitude, obj[i].longitude])
+        .bindPopup( "<b>Placa Patente</b><br><center>" + obj[i].vehicle_id + "</center>" )
+        .addTo( mymap );
+    }
+</script>

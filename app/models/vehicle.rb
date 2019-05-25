@@ -8,31 +8,18 @@ class Vehicle < ApplicationRecord
 
     accepts_nested_attributes_for :waypoints, allow_destroy: true
    
-
-=begin
-
-    post ajax o lo que sea
-
-    params
-
-    strong params permitir parametros en el controller
-
-    params.require(:object).permit(parmas...)
-
-    tu vay a crear un vehiculo que tiene waypoints por ende
-    tu post debe ser asi
-
-    {
-        vehicle: {
-            vehicle_identifier: "uno-123",
-            waypoints: [
-                latitude: 123,
-                longitude: 123,
-                sent_at: "2013-12-34"
-            ]
-        } 
+    scope :lastGPS, -> {
+        Vehicle.find_by_sql(
+            "select t1.vehicle_id, t1.latitude, t1.longitude, t1.sent_at
+            from waypoints t1
+            inner join
+            (
+            select max(waypoints.sent_at) as maxdate, waypoints.vehicle_id
+            from waypoints
+            group by waypoints.vehicle_id
+            ) t2
+            on t1.vehicle_id = t2.vehicle_id
+            and t1.sent_at = t2.maxdate"
+        )
     }
-
-=end
-
 end

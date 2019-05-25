@@ -13,7 +13,7 @@ class VehiclesController < ApplicationController
     end
 
     def show
-      @vehicles = Vehicle.joins(:waypoints)
+      @vehicles = Vehicle.lastGPS
     end
 
     private

@@ -52,6 +52,8 @@
     var popup = L.popup();
 
     function onMapClick(e) {
+        let current_datetime = new Date()
+        let formatted_date = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds()
         popup
             .setLatLng(e.latlng)
             .setContent("You clicked the map at " + e.latlng.toString())
@@ -59,7 +61,7 @@
         
         document.getElementById('inputlatitude').value = e.latlng.lat;
         document.getElementById('inputLongitude').value = e.latlng.lng;
-        document.getElementById('inputSent_at').value = new Date();
+        document.getElementById('inputSent_at').value = formatted_date;
     }
 
     mymap.on('click', onMapClick);
@@ -76,13 +78,17 @@
                 waypoints: [{
                     latitude: $("#inputlatitude").val(),
                     longitude: $("#inputLongitude").val(),
-                    sent_at: "2016-06-02 20:45:00"
+                    sent_at: $("#inputSent_at").val()
                     }]
                 }
             }),
-            success: function () {
-                swal("Done!", "It was succesfully deleted!", "success");
-            }
+            success: function (response) {
+                document.getElementById("inputVehicleId").value = "";
+                swal(response.status, response.msg, "success");
+            },
+            error: function (response) {
+                swal(response.status, response.msg, "error");
+            },
         });
     }
 </script>
