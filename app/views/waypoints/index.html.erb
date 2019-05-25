@@ -1,0 +1,25 @@
+<div class="container">
+    <h3> Todas las ubicaciones <%= link_to 'Agregar', vehicle_path, :class => " btn btn-sm btn-outline-primary"%></h3>
+    <div class="row">
+        <div class="card-body">
+            <table id="table" class="table" >
+                <thead>
+                    <th>Placa Patente</th>
+                    <th>Longitud</th>
+                    <th>Latitud</th>
+                    <th>Última conexión</th>
+                </thead>
+                <tbody>
+                    <% @waypoints.each do |waypoint|  %>
+                    <tr>
+                        <td><%= waypoint.vehicle_id %></td>
+                        <td><%= waypoint.latitude %></td>
+                        <td><%= waypoint.longitude %></td>
+                        <td><%= waypoint.sent_at %></td>
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

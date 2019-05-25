@@ -1,8 +1,8 @@
 <div class="container">
-    <h3> Waypoints </h3><br>
+    <br>
     <div class="row">
         <div class="col-md-12">
-            <div id='mapid' style="width: 800px; height: 300px;"></div>
+            <div id='mapid' style="width: 800px; height: 300px; border: 1px solid #AAA;"></div>
         </div>
     </div>
     <br>
@@ -29,8 +29,9 @@
                 <div class="form-group row">
                     <div class="col-sm-12">
                         <div class="text-right">
-                            <button type="button" onclick="submitFrmAjax();" class="btn btn-success btn-sm">Agregar</button>
-                            <%= link_to 'Volver', waypoints_path, :class => "btn btn-secondary btn-sm"%>
+                            <button type="button" onclick="submitFrmAjax();" class="btn btn-outline-success btn-sm">Agregar Ubicación</button>
+                            <%= link_to 'Ver Ubicaciones', waypoints_path, :class => "btn btn-outline-secondary btn-sm"%>
+                            <%= link_to 'Ubicaciones Recientes', show_path, :class => "btn btn-outline-info btn-sm"%>
                         </div>
                     </div>
                 </div>
